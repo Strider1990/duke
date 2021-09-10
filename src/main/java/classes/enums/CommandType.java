@@ -4,5 +4,6 @@ public enum CommandType {
     ADD,
     COMPLETE,
     LIST,
-    EXIT
+    EXIT,
+    REMOVE
 }

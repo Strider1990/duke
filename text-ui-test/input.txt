@@ -4,3 +4,5 @@ list
 event meet friend /at 2021-09-15
 done 2
 list
+delete 2
+list

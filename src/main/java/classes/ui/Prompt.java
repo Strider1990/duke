@@ -14,6 +14,7 @@ public class Prompt implements Promptable<Task> {
     private static final String END = "Bye. Hope to see you again soon!";
     private static final String DONE = "Nice! I've marked this task as done:";
     private static final String ADD = "added: ";
+    private static final String REMOVE = "Noted. I've removed this task:";
 
     @Override
     public String start() {
@@ -22,11 +23,8 @@ public class Prompt implements Promptable<Task> {
 
     @Override
     public String add(Task printable, int length) {
-        String multipleStr = (length > 1) ? "tasks" : "task";
-        String taskStr = length + " " + multipleStr;
         String output = formatLine(ADD + printable.toString());
-        output += formatLine("Now you have " + taskStr + " in the list.");
-
+        output += count(length);
         return formatOutput(output);
     }
 
@@ -34,6 +32,14 @@ public class Prompt implements Promptable<Task> {
     public String done(Task printable) {
         String output = formatLine(DONE);
         output += formatLine("   " + printable.toStatusString());
+        return formatOutput(output);
+    }
+
+    @Override
+    public String remove(Task printable, int length) {
+        String output = formatLine(REMOVE);
+        output += formatLine("   " + printable.toStatusString());
+        output += count(length);
         return formatOutput(output);
     }
 
@@ -73,6 +79,12 @@ public class Prompt implements Promptable<Task> {
     @Override
     public String exit() {
         return formatOutput(formatLine(END));
+    }
+
+    private String count(int length) {
+        String multipleStr = (length > 1) ? "tasks" : "task";
+        String taskStr = length + " " + multipleStr;
+        return formatLine("Now you have " + taskStr + " in the list.");
     }
 
     private String formatLine(String output) {

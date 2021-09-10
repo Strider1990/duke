@@ -9,6 +9,8 @@ public interface Promptable<T extends Task> {
 
     String done(T printable);
 
+    String remove(T printable, int length);
+
     String error(String header, String errorMessage);
 
     String error(String errorMessage);
